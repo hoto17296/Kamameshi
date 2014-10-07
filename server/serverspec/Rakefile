@@ -1,0 +1,23 @@
+require 'rake'
+require 'rspec/core/rake_task'
+require 'yaml'
+
+env = ENV['SERVERSPEC_ENV'] || 'development'
+properties = YAML.load_file("hosts/#{env}.yml")
+
+desc "Run serverspec to all hosts"
+task :spec => 'serverspec:all'
+
+namespace :serverspec do
+  task :all => properties.keys.map{|key|
+    'serverspec:' + key.split('.')[0]
+  }.to_a
+  properties.keys.each do |key|
+    desc "Run serverspec to #{key}"
+    RSpec::Core::RakeTask.new(key.split('.')[0].to_sym) do |t|
+      ENV['TARGET_HOST'] = key
+      roles = properties[key][:roles].join(',')
+      t.pattern = "spec/{#{roles}}/*_spec.rb"
+    end
+  end
+end

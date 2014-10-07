@@ -1,0 +1,9 @@
+web1.kamameshi.local:
+  :roles:
+    - base
+    - web
+    - db
+db1.kamameshi.local:
+  :roles:
+    - base
+    - db
