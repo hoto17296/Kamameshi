@@ -16,3 +16,22 @@
   = link_to 'Destroy', @event, :method => :delete, :data => { :confirm => 'Are you sure?' }
   \|
   = link_to 'Back', events_path
+
+%h2 グループ一覧
+- @event.groups.each do |group|
+  %table
+    %tr
+      %th name
+    - group.user_groups.each do |user_group|
+      %tr
+        %td= user_group.user.name
+
+%h2 参加(未振り分け)
+%ul
+  - @event.unassigned.each do |user_group|
+    %li= user_group.user.name
+
+%h2 不参加
+%ul
+  - @event.nonparticipant.each do |user_group|
+    %li= user_group.user.name
