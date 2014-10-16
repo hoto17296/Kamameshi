@@ -6,5 +6,21 @@
         - @event.errors.full_messages.each do |msg|
           %li= msg
 
+  .title
+    = f.label :title, 'タイトル'
+    = f.text_field :title
+
+  .questions
+    = f.label :questions, '質問'
+    = f.text_area :questions
+
+  .started_at
+    = f.label :started_at, '開始日'
+    = f.date_select :started_at
+
+  .ended_at
+    = f.label :ended_at, '終了日'
+    = f.date_select :ended_at
+
   .actions
     = f.submit 'Save'
