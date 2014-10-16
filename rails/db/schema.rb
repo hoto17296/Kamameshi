@@ -11,7 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141016105649) do
+ActiveRecord::Schema.define(version: 20141016125941) do
+
+  create_table "events", force: true do |t|
+    t.string   "title",      null: false
+    t.text     "questions"
+    t.date     "started_at", null: false
+    t.date     "ended_at",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "groups", force: true do |t|
+    t.string   "iqube_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_groups", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "group_id"
+    t.integer  "event_id",   null: false
+    t.text     "answers"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_groups", ["event_id"], name: "index_user_groups_on_event_id", using: :btree
+  add_index "user_groups", ["group_id"], name: "index_user_groups_on_group_id", using: :btree
+  add_index "user_groups", ["user_id"], name: "index_user_groups_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false
