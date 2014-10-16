@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     get 'logout', to: 'devise/sessions#destroy', as: :destroy_user_session
   end
 
+  resources :event, as: :events, controller: :events
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
