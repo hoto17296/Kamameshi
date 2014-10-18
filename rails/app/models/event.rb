@@ -2,6 +2,10 @@ class Event < ActiveRecord::Base
   has_many :user_groups
   has_many :groups
 
+  serialize :questions, Array
+
+  before_save :remove_empty_questions
+
   scope :current, -> { where('started_at <= ? AND ended_at >= ?', Date.today, Date.today).first }
   scope :recent, -> { order('started_at DESC').first }
 
@@ -25,4 +29,8 @@ class Event < ActiveRecord::Base
     started_at <= Date.today and ended_at >= Date.today
   end
 
+  private
+    def remove_empty_questions
+      self.questions = questions.select{|v| !v.rstrip.empty? }
+    end
 end

@@ -2,7 +2,8 @@
 
 %dl
   %dt questions
-  %dd= @event.questions
+  - @event.questions.each do |question|
+    %dd= question
   %dt started_at
   %dd= @event.started_at
   %dt ended_at

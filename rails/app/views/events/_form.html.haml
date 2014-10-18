@@ -12,7 +12,8 @@
 
   .questions
     = f.label :questions, '質問'
-    = f.text_area :questions
+    - 10.times do |n|
+      %div= f.text_field :questions, name: 'event[questions][]', id: nil, value: @event.questions[n]
 
   .started_at
     = f.label :started_at, '開始日'
