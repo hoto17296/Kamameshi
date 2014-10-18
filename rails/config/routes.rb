@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'user#index'
+  match '/participate' => 'user#participate', via: [ :get, :post, :patch ]
 
   devise_for :users,
     controllers: { omniauth_callbacks: 'omniauth_callbacks' },

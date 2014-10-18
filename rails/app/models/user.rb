@@ -21,4 +21,14 @@ class User < ActiveRecord::Base
     user
   end
 
+  def reply(event = nil)
+    event = Event.current.first if event.nil?
+    return nil if event.nil?
+    UserGroup.where(user_id: id, event_id: event.id).first
+  end
+
+  def replied?(event = nil)
+    reply(event).present?
+  end
+
 end

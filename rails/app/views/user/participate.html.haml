@@ -1,0 +1,16 @@
+%h1= @event.title
+
+= form_for @reply, url: :participate do |f|
+  - if @reply.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@event.errors.count, "error")} prohibited this event from being saved:"
+      %ul
+        - @reply.errors.full_messages.each do |msg|
+          %li= msg
+
+  %div
+    = f.check_box :is_participant
+    = f.label :is_participant, '参加します'
+
+  %div
+    = f.submit '回答を送信'
