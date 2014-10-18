@@ -1,2 +1,39 @@
 %h1 かまめしランチ
 %p= link_to 'ログアウト', destroy_user_session_path
+
+- if @event.present?
+  %h2= @event.title
+  - if @reply.present?
+
+    - if @event.inviting?
+      -# 回答受付中
+      %p
+        あなたは今回の かまめしランチ に 「
+        %strong= @reply.is_participant ? '参加する' : '参加しない'
+        」 と回答しています。
+      %p= link_to '回答を変更する', :participate
+
+    - else
+      -# 回答受付終了後
+
+      - if @reply.is_participant
+        -# 「参加する」を選択した場合
+
+        - if @reply.group.nil?
+          -# 振り分け前
+          %p メンバーはまだ決まっていません。
+          %p 決まり次第連絡いたしますので、しばらくお待ちください。
+
+        - else
+          -# TODO 振り分け後
+          %p メンバーは以下の通りです。
+
+      - else
+        -# 「参加しない」を選択した場合
+        %p あなたは今回の かまめしランチ に参加しませんでした。
+        %p 次回はぜひご参加ください。
+
+  - else
+    -# 回答しないまま受付終了した場合
+    %p あなたは今回の かまめしランチ に参加しませんでした。
+    %p 次回はぜひご参加ください。
