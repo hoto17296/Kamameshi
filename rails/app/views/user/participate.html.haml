@@ -8,9 +8,14 @@
         - @reply.errors.full_messages.each do |msg|
           %li= msg
 
+  %h2 今回の かまめしランチ に参加しますか？
   %div
     = f.check_box :is_participant
-    = f.label :is_participant, '参加します'
+    = f.label :is_participant, '参加する'
+
+  - @event.questions.each_with_index do |question, i|
+    %h2= question
+    = f.text_field :answers, name: "user_group[answers][]", id: nil, value: @reply.answers[i]
 
   %div
     = f.submit '回答を送信'

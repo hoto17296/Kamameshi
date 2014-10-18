@@ -35,7 +35,7 @@ class UserController < ApplicationController
 
   private
     def reply_params
-      params.require(:user_group).permit(:is_participant)
+      params.require(:user_group).permit(:is_participant, { answers: [] })
     end
 
 end
