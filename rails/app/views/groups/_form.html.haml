@@ -1,0 +1,26 @@
+= form_for @group do |f|
+  - if @group.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@group.errors.count, "error")} prohibited this group from being saved:"
+      %ul
+        - @group.errors.full_messages.each do |msg|
+          %li= msg
+
+  %div
+    = f.label :iqube_url, 'iQube URL'
+    = f.text_field :iqube_url
+
+  %h2 未割り当てユーザ
+  %table
+    %tr
+      %th 名前
+      - @event.questions.each do |question|
+        %th= question
+    - @event.unassigned.each do |user_group|
+      %tr{ data: { id: user_group.id } }
+        %td= user_group.user.name
+        - @event.questions.size.times do |n|
+          %td= user_group.answers[n]
+
+  .actions
+    = f.submit 'Save'

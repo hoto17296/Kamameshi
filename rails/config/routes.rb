@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   end
 
   resources :event, as: :events, controller: :events
+  resources :groups, path: 'event/:event_id/group'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
