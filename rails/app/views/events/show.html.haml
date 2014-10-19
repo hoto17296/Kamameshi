@@ -17,14 +17,15 @@
   = link_to 'Back', events_path
 
 %h2 グループ一覧
-= link_to 'グループを作成', new_group_path(event_id: @event.id)
 - @event.groups.each do |group|
+  %h3= link_to "グループ#{group.id}", edit_group_path(group, event_id: @event.id)
   %table
     %tr
       %th name
     - group.user_groups.each do |user_group|
       %tr
         %td= user_group.user.name
+= link_to 'グループを作成', new_group_path(event_id: @event.id)
 
 %h2 参加(未振り分け)
 %ul

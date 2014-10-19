@@ -1,4 +1,4 @@
-= form_for @group do |f|
+= form_for @group, url: group_path(@group, event_id: @event.id) do |f|
   - if @group.errors.any?
     #error_explanation
       %h2= "#{pluralize(@group.errors.count, "error")} prohibited this group from being saved:"
@@ -10,6 +10,20 @@
     = f.label :iqube_url, 'iQube URL'
     = f.text_field :iqube_url
 
+  %h2 グループのメンバー
+  %table
+    %tr
+      %th 名前
+      %th リーダー
+      - @event.questions.each do |question|
+        %th= question
+    - @group.user_groups.each do |user_group|
+      %tr.user_group{ data: { id: user_group.id } }
+        %td= user_group.user.name
+        %td= f.radio_button :leader_id, user_group.id
+        - @event.questions.size.times do |n|
+          %td= user_group.answers[n]
+
   %h2 未割り当てユーザ
   %table
     %tr
@@ -17,7 +31,7 @@
       - @event.questions.each do |question|
         %th= question
     - @event.unassigned.each do |user_group|
-      %tr{ data: { id: user_group.id } }
+      %tr.user_group{ data: { id: user_group.id } }
         %td= user_group.user.name
         - @event.questions.size.times do |n|
           %td= user_group.answers[n]

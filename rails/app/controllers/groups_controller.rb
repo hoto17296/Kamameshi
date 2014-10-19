@@ -60,6 +60,6 @@ class GroupsController < ApplicationController
     end
 
     def group_params
-      params[:group]
+      params.require(:group).permit(:iqube_url, :leader_id)
     end
 end
