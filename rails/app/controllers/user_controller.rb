@@ -4,7 +4,7 @@ class UserController < ApplicationController
   def index
     # イベント開催中かつ出欠未回答なら回答ページにリダイレクト
     redirect_to :participate if Event.inviting? and not current_user.replied?
-    @event = Event.recent
+    @event = Event.recent.first
     @reply = current_user.reply @event
   end
 
@@ -14,7 +14,7 @@ class UserController < ApplicationController
 
   # 回答ページ
   def participate
-    @event = Event.current
+    @event = Event.current.first
     redirect_to :root if @event.nil?
     @reply = current_user.reply @event
 
