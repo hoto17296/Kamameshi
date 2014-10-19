@@ -24,8 +24,22 @@
           %p 決まり次第連絡いたしますので、しばらくお待ちください。
 
         - else
-          -# TODO 振り分け後
-          %p メンバーは以下の通りです。
+          -# 振り分け後
+          %p 今回のランチはこのメンバーです！
+          %table.table
+            - @reply.group.user_groups.each do |user_group|
+              %tr
+                %td
+                  = user_group.user.name
+                  - if user_group.leader?
+                    .label.label-success リーダー
+          -# TODO 説明
+          - if @reply.leader?
+            %h2 あなたはリーダーです！
+            %p 日程調整の仕方は〜〜〜
+            %p 経費精算の仕方は〜〜〜
+          %h2 かまめしランチ とは
+          %p せつめいなどなど
 
       - else
         -# 「参加しない」を選択した場合
