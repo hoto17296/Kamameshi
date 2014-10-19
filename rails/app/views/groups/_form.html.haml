@@ -11,30 +11,39 @@
     = f.text_field :iqube_url
 
   %h2 グループのメンバー
+  %script#group_users{ type: 'application/json' }
+    = render partial: 'user_groups/index.json.jbuilder', locals: { user_groups: @group.user_groups }
   %table
     %tr
+      %th
       %th 名前
       %th リーダー
       - @event.questions.each do |question|
         %th= question
-    - @group.user_groups.each do |user_group|
-      %tr.user_group{ data: { id: user_group.id } }
-        %td= user_group.user.name
-        %td= f.radio_button :leader_id, user_group.id
-        - @event.questions.size.times do |n|
-          %td= user_group.answers[n]
+    %tr.user_group.js_template
+      %td
+        %button{ type: :button, class: :remove_user } -
+        %input{ type: :hidden, name: 'group[member_ids][]', class: :member_id }
+      %td.user_name
+      %td= f.radio_button :leader_id, nil, class: :leader_id_radio
+      - @event.questions.size.times do |n|
+        %td{ class: "answer-#{n}" }
 
   %h2 未割り当てユーザ
+  %script#unassigned_users{ type: 'application/json' }
+    = render partial: 'user_groups/index.json.jbuilder', locals: { user_groups: @event.unassigned }
   %table
     %tr
+      %th
       %th 名前
       - @event.questions.each do |question|
         %th= question
-    - @event.unassigned.each do |user_group|
-      %tr.user_group{ data: { id: user_group.id } }
-        %td= user_group.user.name
-        - @event.questions.size.times do |n|
-          %td= user_group.answers[n]
+    %tr.user_group.js_template
+      %td
+        %button{ type: :button, class: :add_user } +
+      %td.user_name
+      - @event.questions.size.times do |n|
+        %td{ class: "answer-#{n}" }
 
   .actions
     = f.submit 'Save'
