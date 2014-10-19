@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
 
   resources :event, as: :events, controller: :events
-  resources :groups, path: 'event/:event_id/group'
+  resources :groups, path: 'event/:event_id/group', except: [:index, :show, :destroy]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

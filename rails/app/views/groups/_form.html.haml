@@ -26,7 +26,7 @@
         %button{ type: :button, class: :action } -
         %input{ type: :hidden, name: 'group[member_ids][]', class: :data_id }
       %td.user_name
-      %td= f.radio_button :leader_id, nil, class: :leader_id
+      %td= f.radio_button :leader_id, nil, class: :leader_id, checked: nil
       - @event.questions.size.times do |n|
         %td{ class: "answer-#{n}" }
 
