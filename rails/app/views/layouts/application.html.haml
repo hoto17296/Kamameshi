@@ -15,10 +15,10 @@
 
     = render 'header'
 
-    %p.notice= notice
-    %p.alert= alert
+    .container
+      = render 'flash'
 
-    = yield
+      = yield
 
     = javascript_include_tag "united"
     = yield(:page_javascript) if content_for?(:page_javascript)
