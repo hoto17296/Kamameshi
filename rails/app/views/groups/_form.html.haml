@@ -1,3 +1,4 @@
+= javascript_include_tag :group_form
 = form_for @group, url: group_path(@group, event_id: @event.id) do |f|
   - if @group.errors.any?
     #error_explanation
@@ -11,36 +12,36 @@
     = f.text_field :iqube_url
 
   %h2 グループのメンバー
-  %script#group_users{ type: 'application/json' }
-    = render partial: 'user_groups/index.json.jbuilder', locals: { user_groups: @group.user_groups }
-  %table
+  %script#group_users_json{ type: 'application/json' }
+    = raw render partial: 'user_groups/index.json.jbuilder', locals: { user_groups: @group.user_groups }
+  %table#group_users{ data: { 'leader-id' => @group.leader_id } }
     %tr
       %th
       %th 名前
       %th リーダー
       - @event.questions.each do |question|
         %th= question
-    %tr.user_group.js_template
+    %tr.row.template
       %td
-        %button{ type: :button, class: :remove_user } -
-        %input{ type: :hidden, name: 'group[member_ids][]', class: :member_id }
+        %button{ type: :button, class: :action } -
+        %input{ type: :hidden, name: 'group[member_ids][]', class: :data_id }
       %td.user_name
-      %td= f.radio_button :leader_id, nil, class: :leader_id_radio
+      %td= f.radio_button :leader_id, nil, class: :leader_id
       - @event.questions.size.times do |n|
         %td{ class: "answer-#{n}" }
 
   %h2 未割り当てユーザ
-  %script#unassigned_users{ type: 'application/json' }
-    = render partial: 'user_groups/index.json.jbuilder', locals: { user_groups: @event.unassigned }
-  %table
+  %script#unassigned_users_json{ type: 'application/json' }
+    = raw render partial: 'user_groups/index.json.jbuilder', locals: { user_groups: @event.unassigned }
+  %table#unassigned_users
     %tr
       %th
       %th 名前
       - @event.questions.each do |question|
         %th= question
-    %tr.user_group.js_template
+    %tr.row.template
       %td
-        %button{ type: :button, class: :add_user } +
+        %button{ type: :button, class: :action } +
       %td.user_name
       - @event.questions.size.times do |n|
         %td{ class: "answer-#{n}" }
