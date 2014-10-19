@@ -7,7 +7,7 @@ class Event < ActiveRecord::Base
   before_save :remove_empty_questions
 
   scope :current, -> { where('started_at <= ? AND ended_at >= ?', Date.today, Date.today).first }
-  scope :recent, -> { order('started_at DESC').first }
+  scope :recent, -> { where('started_at <= ?', Date.today).order('started_at DESC').first }
 
   def participant
     user_groups.where is_participant: 1
