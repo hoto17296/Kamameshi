@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
     user
   end
 
+  def admin?
+    is_admin
+  end
+
   def reply(event = nil)
     event = Event.current if event.nil?
     return nil if event.nil?

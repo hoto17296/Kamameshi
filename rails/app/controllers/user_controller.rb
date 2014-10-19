@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-  before_filter :authenticate_user!, except: [:login]
+  before_action :authenticate_user!, except: [:login]
 
   def index
     # イベント開催中かつ出欠未回答なら回答ページにリダイレクト
@@ -9,6 +9,7 @@ class UserController < ApplicationController
   end
 
   def login
+    render layout: false
   end
 
   # 回答ページ

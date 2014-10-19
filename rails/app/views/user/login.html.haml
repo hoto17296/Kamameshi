@@ -1,1 +1,11 @@
-= link_to 'ログイン', user_omniauth_authorize_path(:google_oauth2)
+!!!
+%html
+  %head
+    %title かまめしランチ
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    %p.notice= notice
+    %p.alert= alert
+    = link_to 'ログイン', user_omniauth_authorize_path(:google_oauth2)
