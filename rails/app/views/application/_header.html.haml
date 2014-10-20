@@ -5,7 +5,8 @@
         %span.sr-only Toggle navigation
         - 3.times do
           %span.icon-bar
-      = link_to 'かまめしランチ', root_path, class: 'navbar-brand'
+      = link_to root_path, class: 'navbar-brand' do
+        %span かまめしランチ
     .collapse.navbar-collapse
       %ul.nav.navbar-nav.navbar-right
         - if current_user.admin?
