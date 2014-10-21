@@ -1,7 +1,7 @@
 - content_for :page_javascript do
   = javascript_include_tag :participate_form
 
-%h1= @event.title
+%h2= @event.title
 
 = form_for @reply, url: :participate, html: { role: :form } do |f|
   - if @reply.errors.any?
@@ -11,8 +11,15 @@
         - @reply.errors.full_messages.each do |msg|
           %li= msg
 
+  = fields_for @reply.user do |user|
+    .form-group
+      %h3 部署を選択してください
+      = user.select :post_id, User::post_options, {}, class: 'form-control'
+    .form-group
+      %h3 Skype ID を入力してください(任意)
+      = user.text_field :skype_id, class: 'form-control'
   .form-group.is_participant
-    %p 今回の かまめしランチ に参加しますか？
+    %h3 今回の かまめしランチ に参加しますか？
     = f.hidden_field :is_participant
     .btn-group.btn-group-lg
       %button.btn.btn-default{ type: :button, data: { value: 1 } } 参加する
@@ -20,7 +27,7 @@
 
   - @event.questions.each_with_index do |question, i|
     .form-group
-      %label= question
+      %h3= question
       = f.text_field :answers, name: "user_group[answers][]", id: nil, class: 'form-control', value: @reply.answers[i]
 
   .form-group
