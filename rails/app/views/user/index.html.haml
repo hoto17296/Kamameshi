@@ -27,12 +27,23 @@
           -# 振り分け後
           %p 今回のランチはこのメンバーです！
           %table.table
+            %tr
+              %th 名前
+              %th 部署
+              - if @reply.leader?
+                %th メールアドレス
+                %th Skype ID
             - @reply.group.user_groups.each do |user_group|
               %tr
                 %td
                   = user_group.user.name
                   - if user_group.leader?
                     .label.label-success リーダー
+                %td= user_group.user.post
+                - if @reply.leader?
+                  %td= user_group.user.email
+                  %td= user_group.user.skype_id
+
           -# TODO 説明
           - if @reply.leader?
             %h2 あなたはリーダーです！

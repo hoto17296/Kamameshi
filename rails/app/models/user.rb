@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
     user
   end
 
+  def post
+    post_id.nil? ? nil : POST_LIST[post_id]
+  end
+
   def admin?
     is_admin
   end
