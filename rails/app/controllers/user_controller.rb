@@ -16,16 +16,24 @@ class UserController < ApplicationController
   def participate
     @event = Event.current.first
     redirect_to :root if @event.nil?
+
     @reply = current_user.reply @event
+    if @reply.blank?
+      @reply = UserGroup.new
+      @reply.is_participant = 1
+      @reply.user = current_user
+    end
 
     if request.post?
       @reply = UserGroup.new reply_params
       @reply.user = current_user
+      @reply.user.update user_params
       @reply.event = @event
       if @reply.save
         redirect_to :root, notice: '回答を受け付けました'
       end
     elsif request.patch?
+      @reply.user.update user_params
       if @reply.update reply_params
         redirect_to :root, notice: '回答を更新しました'
       end
@@ -39,4 +47,7 @@ class UserController < ApplicationController
       params.require(:user_group).permit(:is_participant, { answers: [] })
     end
 
+    def user_params
+      params.require(:user).permit(:post_id, :skype_id)
+    end
 end

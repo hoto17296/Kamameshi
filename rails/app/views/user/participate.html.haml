@@ -11,6 +11,13 @@
         - @reply.errors.full_messages.each do |msg|
           %li= msg
 
+  = fields_for @reply.user do |user|
+    .form-group
+      %h3 部署を選択してください
+      = user.select :post_id, User::post_options, {}, class: 'form-control'
+    .form-group
+      %h3 Skype ID を入力してください(任意)
+      = user.text_field :skype_id, class: 'form-control'
   .form-group.is_participant
     %h3 今回の かまめしランチ に参加しますか？
     = f.hidden_field :is_participant
