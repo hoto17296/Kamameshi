@@ -1,15 +1,6 @@
-%p#notice= notice
+= markdown @page.body
 
-%p
-  %b Body:
-  = @page.body
-%p
-  %b Permalink:
-  = @page.permalink
-%p
-  %b Is public:
-  = @page.is_public
-
-= link_to 'Edit', edit_page_path(@page)
-\|
-= link_to 'Back', pages_path
+.actions
+  = link_to 'Edit', edit_page_path(@page)
+  \|
+  = link_to 'Back', pages_path

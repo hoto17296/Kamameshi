@@ -9,6 +9,7 @@
         %span かまめしランチ
     .collapse.navbar-collapse
       %ul.nav.navbar-nav.navbar-right
+        %li= link_to 'オフィス周辺ランチマップ', map_path
         - if current_user.admin?
           %li= link_to '管理ページ', events_path
         %li.dropdown

@@ -44,3 +44,7 @@ gem 'capistrano-rails', group: :development
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
+
+gem 'redcarpet'
+
+gem 'actionview-encoded_mail_to'

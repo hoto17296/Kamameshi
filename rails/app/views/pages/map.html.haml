@@ -1,0 +1,11 @@
+%h2 オフィス周辺ランチマップ
+
+%iframe{ src: 'https://mapsengine.google.com/map/u/1/embed?mid=zbivjoo_7UsA.kmHpZH7d8d8g', frameborder: 0, width: '100%', height: '480px' }
+
+%p= link_to '大きな地図で表示', 'https://www.google.com/maps/d/viewer?mid=zbivjoo_7UsA.kmHpZH7d8d8g', target: '_blank'
+
+.alert.alert-info{ role: 'alert' }
+  %strong お店情報募集中です！
+  ここに載っていないオススメのお店がありましたら
+  = mail_to 'yuuki.ishikawa@gaiax.com', nil, encode: :hex
+  までお知らせください！
