@@ -1,0 +1,23 @@
+%h1 Listing pages
+
+%table
+  %tr
+    %th Body
+    %th Permalink
+    %th Is public
+    %th
+    %th
+    %th
+
+  - @pages.each do |page|
+    %tr
+      %td= page.body
+      %td= page.permalink
+      %td= page.is_public
+      %td= link_to 'Show', page
+      %td= link_to 'Edit', edit_page_path(page)
+      %td= link_to 'Destroy', page, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Page', new_page_path

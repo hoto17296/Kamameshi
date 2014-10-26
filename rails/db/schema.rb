@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141019052006) do
+ActiveRecord::Schema.define(version: 20141026044436) do
 
   create_table "events", force: true do |t|
     t.string   "title",      null: false
@@ -32,6 +32,14 @@ ActiveRecord::Schema.define(version: 20141019052006) do
 
   add_index "groups", ["event_id"], name: "index_groups_on_event_id", using: :btree
   add_index "groups", ["leader_id"], name: "index_groups_on_leader_id", using: :btree
+
+  create_table "pages", force: true do |t|
+    t.text     "body",                      null: false
+    t.string   "permalink",                 null: false
+    t.boolean  "is_public",  default: true, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "user_groups", force: true do |t|
     t.integer  "user_id",                        null: false
