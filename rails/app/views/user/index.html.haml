@@ -1,5 +1,3 @@
-%h1 かまめしランチ
-
 - if @event.present?
   %h2= @event.title
   - if @reply.present?
@@ -10,7 +8,14 @@
         あなたは今回の かまめしランチ に 「
         %strong= @reply.is_participant ? '参加する' : '参加しない'
         」 と回答しています。
-      %p= link_to '回答を変更する', :participate
+      - if @reply.is_participant
+        %p メンバーが決まり次第お知らせしますので、しばらくお待ちください。
+      .actions
+        = link_to '回答を変更する', :participate, class: 'btn btn-success'
+        %span.text-muted
+          回答は
+          = @event.ended_at.strftime '%m/%d(%a)'
+          まで変更できます
 
     - else
       -# 回答受付終了後
@@ -21,7 +26,7 @@
         - if @reply.group.nil?
           -# 振り分け前
           %p メンバーはまだ決まっていません。
-          %p 決まり次第連絡いたしますので、しばらくお待ちください。
+          %p 決まり次第お知らせしますので、しばらくお待ちください。
 
         - else
           -# 振り分け後
@@ -50,3 +55,6 @@
     -# 回答しないまま受付終了した場合
     %p あなたは今回の かまめしランチ に参加しませんでした。
     %p 次回はぜひご参加ください。
+
+- else
+  .alert.alert-info{ role: 'alert' } 現在かまめしランチは開催されていません

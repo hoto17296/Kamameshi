@@ -1,27 +1,33 @@
 - content_for :page_javascript do
   = javascript_include_tag :participate_form
 
-%h1= @event.title
+%h2= @event.title
 
 = form_for @reply, url: :participate, html: { role: :form } do |f|
   - if @reply.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@event.errors.count, "error")} prohibited this event from being saved:"
+      %h3= "#{pluralize(@event.errors.count, "error")} prohibited this event from being saved:"
       %ul
         - @reply.errors.full_messages.each do |msg|
           %li= msg
 
   .form-group.is_participant
-    %p 今回の かまめしランチ に参加しますか？
+    %h3 今回の かまめしランチ に参加しますか？
     = f.hidden_field :is_participant
     .btn-group.btn-group-lg
       %button.btn.btn-default{ type: :button, data: { value: 1 } } 参加する
       %button.btn.btn-default{ type: :button, data: { value: 0 } } 参加しない
 
-  - @event.questions.each_with_index do |question, i|
-    .form-group
-      %label= question
-      = f.text_field :answers, name: "user_group[answers][]", id: nil, class: 'form-control', value: @reply.answers[i]
+  - if @event.questions.count > 0
+    %h3 いくつかの質問にご回答ください
+    %ul
+      %li 回答は必須ではありません
+      %li メンバー決めの参考にさせていただきます
+      %li 回答内容は運営チーム以外には見えることはありません
+    - @event.questions.each_with_index do |question, i|
+      .form-group
+        %h4= question
+        = f.text_field :answers, name: "user_group[answers][]", id: nil, class: 'form-control', value: @reply.answers[i]
 
-  .form-group
+  .form-group.actions
     = f.submit '回答を送信', class: 'btn btn-lg btn-primary'
