@@ -1,7 +1,9 @@
 - content_for :page_javascript do
   = javascript_include_tag :participate_form
 
-%h2= @event.title
+%h2
+  = @event.title
+  参加アンケート
 
 = form_for @reply, url: :participate, html: { role: :form } do |f|
   - if @reply.errors.any?
