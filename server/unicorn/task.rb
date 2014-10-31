@@ -1,25 +1,23 @@
 namespace :unicorn do
-  task :environment do
-    set :unicorn_pid, "/tmp/pids/unicorn-kamameshi.pid"
-    set :unicorn_config, "#{Rails.root}/../server/unicorn/config.rb"
-  end
+  unicorn_pid = "/tmp/pids/unicorn-kamameshi.pid"
+  unicorn_config = "#{Rails.root}/../server/unicorn/config.rb"
 
   def start_unicorn
     within current_path do
-      execute :unicorn_rails, "-c #{fetch(:unicorn_config)} -E production -D"
+      execute :unicorn_rails, "-c #{config} -E production -D"
     end
   end
 
   def stop_unicorn
-    execute :kill, "-s QUIT $(< #{fetch(:unicorn_pid)})"
+    execute :kill, "-s QUIT $(< #{pid})"
   end
 
   def reload_unicorn
-    execute :kill, "-s USR2 $(< #{fetch(:unicorn_pid)})"
+    execute :kill, "-s USR2 $(< #{pid})"
   end
 
   def force_stop_unicorn
-    execute :kill, "$(< #{fetch(:unicorn_pid)})"
+    execute :kill, "$(< #{pid})"
   end
 
   desc "Start unicorn server"
@@ -34,7 +32,7 @@ namespace :unicorn do
 
   desc "Restart unicorn server gracefully"
   task :restart => :environment do
-    if test("[ -f #{fetch(:unicorn_pid)} ]")
+    if test("[ -f #{pid} ]")
       reload_unicorn
     else
       start_unicorn
