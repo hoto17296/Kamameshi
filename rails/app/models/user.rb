@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :user_groups
 
-  POST_LIST = ['ADMIN','COW','AIRY','MONI','SG','SAS','WI','CBG','SOC','MOB','INB','CID','247','RND','INFR','SGW']
+  POST_LIST = ['ADMIN','COW','AIRY','MONI(OCD)','SG','SAS','WI','CBG','SOC','MOB','INB','CID','247','RND','INFR','SGW','XS','その他']
 
   def self.post_options
     POST_LIST.each_with_index.map {|i, post| [ i, post ] }
