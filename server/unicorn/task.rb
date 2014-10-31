@@ -1,46 +1,28 @@
 namespace :unicorn do
-  unicorn_pid = "/tmp/pids/unicorn-kamameshi.pid"
-  unicorn_config = "#{Rails.root}/../server/unicorn/config.rb"
+  pid = '/tmp/pids/unicorn-kamameshi.pid'
+  config = "#{Rails.root}/../server/unicorn/config.rb"
 
-  def start_unicorn
-    within current_path do
-      execute :unicorn_rails, "-c #{config} -E production -D"
-    end
-  end
-
-  def stop_unicorn
-    execute :kill, "-s QUIT $(< #{pid})"
-  end
-
-  def reload_unicorn
-    execute :kill, "-s USR2 $(< #{pid})"
-  end
-
-  def force_stop_unicorn
-    execute :kill, "$(< #{pid})"
-  end
-
-  desc "Start unicorn server"
+  desc 'Start unicorn server'
   task :start => :environment do
-    start_unicorn
+    `unicorn_rails -c #{config} -E production -D`
   end
 
-  desc "Stop unicorn server gracefully"
+  desc 'Stop unicorn server gracefully'
   task :stop => :environment do
-    stop_unicorn
+    `kill -s QUIT $(< #{pid})`
   end
 
-  desc "Restart unicorn server gracefully"
+  desc 'Restart unicorn server gracefully'
   task :restart => :environment do
-    if test("[ -f #{pid} ]")
-      reload_unicorn
+    if File.file? pid
+      `kill -s USR2 $(< #{pid})`
     else
-      start_unicorn
+      invoke 'unicorn:start'
     end
   end
 
-  desc "Stop unicorn server immediately"
+  desc 'Stop unicorn server immediately'
   task :force_stop => :environment do
-    force_stop_unicorn
+    `kill $(< #{pid})`
   end
 end
