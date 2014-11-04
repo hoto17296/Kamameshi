@@ -1,5 +1,5 @@
 namespace :unicorn do
-  pid = '/tmp/pids/unicorn-kamameshi.pid'
+  pid = '/tmp/unicorn-kamameshi.pid'
   config = "#{Rails.root}/../server/unicorn/config.rb"
 
   desc 'Start unicorn server'
