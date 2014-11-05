@@ -40,6 +40,9 @@ class PagesController < ApplicationController
   def map
   end
 
+  def qa
+  end
+
   private
     def set_page
       @page = Page.find(params[:id])

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :page, as: :pages, controller: :pages
 
   get 'map', to: 'pages#map', as: :map
+  get 'qa', to: 'pages#qa', as: :qa
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
