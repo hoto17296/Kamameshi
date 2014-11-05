@@ -17,7 +17,7 @@ class GroupsController < ApplicationController
 
     if @group.save
       @group.destroy if @group.user_groups.size == 0
-      redirect_to @event, notice: 'Group was successfully created.'
+      redirect_to @event, notice: 'グループを作成しました'
     else
       render :new
     end
@@ -26,7 +26,7 @@ class GroupsController < ApplicationController
   def update
     if @group.update(group_params)
       @group.destroy if @group.user_groups.size == 0
-      redirect_to @event, notice: 'Group was successfully updated.'
+      redirect_to @event, notice: 'グループを更新しました'
     else
       render :edit
     end
@@ -34,10 +34,7 @@ class GroupsController < ApplicationController
 
   def destroy
     @group.destroy
-    respond_to do |format|
-      format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to groups_url, notice: 'グループを削除しました'
   end
 
   private
