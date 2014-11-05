@@ -1,7 +1,21 @@
-%h1 Listing events
+%h2 今までに開催したイベント一覧
 
-%ul
+%table.table.table-hover.table-bordered
+  %tr
+    %th
+    %th 募集期間
   - @events.each do |event|
-    %li= link_to event.title, event
+    %tr
+      %td
+        = link_to event.title, event
+        - if event.inviting?
+          .label.label-success 募集中
+      %td
+        = event.started_at
+        〜
+        = event.ended_at
 
-%p= link_to 'New Event', new_event_path
+.actions
+  = link_to new_event_path, class: 'btn btn-success' do
+    %i.glyphicon.glyphicon-plus
+    新しいイベントを作成
