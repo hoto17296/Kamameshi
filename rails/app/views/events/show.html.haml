@@ -23,6 +23,9 @@
       %small
         = link_to edit_group_path(group, event_id: @event.id), title: 'グループを編集' do
           %i.glyphicon.glyphicon-pencil
+        - if group.iqube_url.present?
+          = link_to group.iqube_url, title: 'スケジュール詳細', target: '_blank' do
+            %i.glyphicon.glyphicon-calendar
     = render 'user_groups', user_groups: group.user_groups
 - else
   .alert.alert-info{ role: 'alert' } まだグループがありません

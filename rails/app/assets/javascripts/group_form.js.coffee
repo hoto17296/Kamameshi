@@ -31,7 +31,8 @@ UserTable.prototype = {
     $.each data.answers, (i, answer) ->
       $row.find(".answer-#{i}").text(answer)
     $row.find('.action').click(this.action)
-    this.$table.append $row
+    console.log this.$table, $row
+    this.$table.find('tbody').append $row
 
   remove_row: (data_id) ->
     data = this.data[data_id]
@@ -50,11 +51,11 @@ $ ->
   unassigned_users = new UserTable({ id: 'unassigned_users', action: assign_user })
 
 assign_user = ->
-  id = $(this).closest('.row').data('id')
+  id = $(this).closest('tr').data('id')
   data = unassigned_users.remove_row(id)
   group_users.add_row(data)
 
 unassign_user = ->
-  id = $(this).closest('.row').data('id')
+  id = $(this).closest('tr').data('id')
   data = group_users.remove_row(id)
   unassigned_users.add_row(data)

@@ -1,6 +1,7 @@
 - content_for :page_javascript do
   = javascript_include_tag :group_form
-= form_for @group, url: url do |f|
+
+= form_for @group, url: url, html: { role: 'form' } do |f|
   - if @group.errors.any?
     #error_explanation
       %h2= "#{pluralize(@group.errors.count, "error")} prohibited this group from being saved:"
@@ -8,25 +9,25 @@
         - @group.errors.full_messages.each do |msg|
           %li= msg
 
-  %div
+  .form-group
     = f.label :iqube_url, 'iQube URL'
-    = f.text_field :iqube_url
+    = f.text_field :iqube_url, class: 'form-control', placeholder: 'https://app.iqube.net/schedules/xxxxxxx'
 
   %h2 グループのメンバー
   %script#group_users_json{ type: 'application/json' }
     = raw render partial: 'user_groups/index.json.jbuilder', locals: { user_groups: @group.user_groups }
-  %table#group_users{ data: { 'leader-id' => @group.leader_id } }
+  %table.table.table-hover.table-bordered#group_users{ data: { 'leader-id' => @group.leader_id } }
     %tr
       %th
-      %th 名前
       %th リーダー
       - @event.questions.each do |question|
         %th= question
-    %tr.row.template
+    %tr.template
       %td
-        %button{ type: :button, class: :action } -
+        %button{ type: :button, class: 'action btn btn-danger btn-xs' }
+          %i.glyphicon.glyphicon-minus
         %input{ type: :hidden, name: 'group[member_ids][]', class: :data_id }
-      %td.user_name
+        %span.user_name
       %td= f.radio_button :leader_id, nil, class: :leader_id, checked: nil
       - @event.questions.size.times do |n|
         %td{ class: "answer-#{n}" }
@@ -34,18 +35,18 @@
   %h2 未割り当てユーザ
   %script#unassigned_users_json{ type: 'application/json' }
     = raw render partial: 'user_groups/index.json.jbuilder', locals: { user_groups: @event.unassigned }
-  %table#unassigned_users
+  %table.table.table-hover.table-bordered#unassigned_users
     %tr
       %th
-      %th 名前
       - @event.questions.each do |question|
         %th= question
-    %tr.row.template
+    %tr.template
       %td
-        %button{ type: :button, class: :action } +
-      %td.user_name
+        %button{ type: :button, class: 'action btn btn-success btn-xs' }
+          %i.glyphicon.glyphicon-plus
+        %span.user_name
       - @event.questions.size.times do |n|
         %td{ class: "answer-#{n}" }
 
   .actions
-    = f.submit 'Save'
+    = f.submit '保存', class: 'btn btn-lg btn-success'
