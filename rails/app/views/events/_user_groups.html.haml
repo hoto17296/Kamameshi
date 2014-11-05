@@ -1,0 +1,11 @@
+%table.table.table-hover.table-bordered
+  %tr
+    %th 名前
+    %th 部署
+  - user_groups.each do |user_group|
+    %tr
+      %td
+        = user_group.user.name
+        - if user_group.leader?
+          .label.label-success リーダー
+      %td= user_group.user.post

@@ -14,7 +14,7 @@
         = link_to '回答を変更する', :participate, class: 'btn btn-success'
         %span.text-muted
           回答は
-          = @event.ended_at.strftime '%m/%d(%a)'
+          = @event.ended_at
           まで変更できます
 
     - else

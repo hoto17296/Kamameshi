@@ -1,38 +1,45 @@
-%h1= @event.title
+%h1
+  = @event.title
+  %small
+    = link_to edit_event_path(@event), title: 'イベントを編集' do
+      %i.glyphicon.glyphicon-pencil
 
-%dl
-  %dt questions
+%dl.dl-horizontal
+  %dt アンケート項目
   - @event.questions.each do |question|
     %dd= question
-  %dt started_at
-  %dd= @event.started_at
-  %dt ended_at
-  %dd= @event.ended_at
-
-.actions
-  = link_to 'Edit', edit_event_path(@event)
-  \|
-  = link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' }
-  \|
-  = link_to 'Back', events_path
+  %dt 募集期間
+  %dd
+    = @event.started_at
+    〜
+    = @event.ended_at
 
 %h2 グループ一覧
-- @event.groups.each do |group|
-  %h3= link_to "グループ#{group.id}", edit_group_path(group, event_id: @event.id)
-  %table
-    %tr
-      %th name
-    - group.user_groups.each do |user_group|
-      %tr
-        %td= user_group.user.name
-= link_to 'グループを作成', new_group_path(event_id: @event.id)
+- if @event.groups.present?
+  - @event.groups.each do |group|
+    %h3
+      グループ
+      = group.id
+      %small
+        = link_to edit_group_path(group, event_id: @event.id), title: 'グループを編集' do
+          %i.glyphicon.glyphicon-pencil
+    = render 'user_groups', user_groups: group.user_groups
+- else
+  .alert.alert-info{ role: 'alert' } まだグループがありません
+
+.actions
+  = link_to new_group_path(event_id: @event.id), class: 'btn btn-success' do
+    %i.glyphicon.glyphicon-plus
+    新しいグループを作成
 
 %h2 参加(未振り分け)
-%ul
-  - @event.unassigned.each do |user_group|
-    %li= user_group.user.name
+- if @event.unassigned.present?
+  = render 'user_groups', user_groups: @event.unassigned
+- else
+  .alert.alert-info{ role: 'alert' } 未振り分けの参加者はいません
 
 %h2 不参加
-%ul
-  - @event.nonparticipant.each do |user_group|
-    %li= user_group.user.name
+- if @event.nonparticipant.present?
+  = render 'user_groups', user_groups: @event.nonparticipant
+- else
+  .alert.alert-info{ role: 'alert' } 不参加のユーザはいません
