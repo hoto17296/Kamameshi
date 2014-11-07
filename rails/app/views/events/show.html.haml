@@ -29,6 +29,8 @@
         - if group.iqube_url.present?
           = link_to group.iqube_url, title: 'スケジュール詳細', target: '_blank' do
             %i.glyphicon.glyphicon-calendar
+        - if group.leader.nil?
+          %span.label.label-danger リーダーがいません
     = render 'user_groups', user_groups: group.user_groups
 - else
   .alert.alert-info{ role: 'alert' } まだグループがありません
