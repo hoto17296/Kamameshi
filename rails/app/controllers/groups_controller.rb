@@ -24,6 +24,7 @@ class GroupsController < ApplicationController
   end
 
   def update
+    @group.leader = nil
     if @group.update(group_params)
       @group.destroy if @group.user_groups.size == 0
       redirect_to @event, notice: 'グループを更新しました'
