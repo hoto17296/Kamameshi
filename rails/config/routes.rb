@@ -19,8 +19,9 @@ Rails.application.routes.draw do
   resources :groups, path: 'event/:event_id/group', except: [:index, :show, :destroy]
   resources :page, as: :pages, controller: :pages
 
-  get 'map', to: 'pages#map', as: :map
-  get 'qa', to: 'pages#qa', as: :qa
+  [ :map, :qa ].each do |key|
+    get key, to: "pages##{key}", as: key
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
