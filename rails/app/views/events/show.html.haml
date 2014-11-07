@@ -9,10 +9,13 @@
   - @event.questions.each do |question|
     %dd= question
   %dt 募集期間
-  %dd
-    = @event.started_at
-    〜
-    = @event.ended_at
+  %dd= "#{@event.started_at} 〜 #{@event.ended_at}"
+  %dt 回答数
+  %dd= "#{@event.user_groups.size} 人"
+  %dt 参加者数
+  %dd= "#{@event.participant.size} 人"
+  %dt 不参加者数
+  %dd= "#{@event.nonparticipant.size} 人"
 
 %h2 グループ一覧
 - if @event.groups.present?
@@ -35,13 +38,13 @@
     %i.glyphicon.glyphicon-plus
     新しいグループを作成
 
-%h2 参加(未振り分け)
+%h2= "未振り分け(#{@event.unassigned.size})"
 - if @event.unassigned.present?
   = render 'user_groups', user_groups: @event.unassigned
 - else
   .alert.alert-info{ role: 'alert' } 未振り分けの参加者はいません
 
-%h2 不参加
+%h2= "不参加(#{@event.nonparticipant.size})"
 - if @event.nonparticipant.present?
   = render 'user_groups', user_groups: @event.nonparticipant
 - else
