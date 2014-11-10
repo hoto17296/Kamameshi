@@ -14,6 +14,7 @@
   %table.table.table-hover.table-bordered#group_users{ data: { 'leader-id' => @group.leader_id } }
     %tr
       %th
+      %th 部署
       %th リーダー
       - @event.questions.each do |question|
         %th= question
@@ -23,6 +24,7 @@
           %i.glyphicon.glyphicon-minus
         %input{ type: :hidden, name: 'group[member_ids][]', class: :data_id }
         %span.user_name
+      %td.user_post
       %td= f.radio_button :leader_id, nil, class: :leader_id, checked: nil
       - @event.questions.size.times do |n|
         %td{ class: "answer-#{n}" }
@@ -37,6 +39,7 @@
   %table.table.table-hover.table-bordered#unassigned_users
     %tr
       %th
+      %th 部署
       - @event.questions.each do |question|
         %th= question
     %tr.template
@@ -44,6 +47,7 @@
         %button{ type: :button, class: 'action btn btn-success btn-xs' }
           %i.glyphicon.glyphicon-plus
         %span.user_name
+      %td.user_post
       - @event.questions.size.times do |n|
         %td{ class: "answer-#{n}" }
 

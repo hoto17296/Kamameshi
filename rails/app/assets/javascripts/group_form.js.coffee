@@ -27,6 +27,7 @@ UserTable.prototype = {
     $row.data('id', data.id)
     $row.find('.data_id').val(data.id)
     $row.find('.user_name').text(data.user.name)
+    $row.find('.user_post').text(data.user.post)
     $row.find('.leader_id').val(data.id).attr('id', "leader_id_radio-#{data.id}")
     $.each data.answers, (i, answer) ->
       $row.find(".answer-#{i}").text(answer)
