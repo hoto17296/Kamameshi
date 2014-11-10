@@ -27,6 +27,10 @@
       - @event.questions.size.times do |n|
         %td{ class: "answer-#{n}" }
 
+  = render layout: 'alert', locals: { type: :warning } do
+    %i.glyphicon.glyphicon-exclamation-sign
+    SGWの人はリーダーにしないようにしてください
+
   %h2 未割り当てユーザ
   %script#unassigned_users_json{ type: 'application/json' }
     = raw render partial: 'user_groups/index.json.jbuilder', locals: { user_groups: @event.unassigned }
