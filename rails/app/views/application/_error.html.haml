@@ -1,0 +1,5 @@
+.error.alert.alert-danger.alert-dismissible{ role: :alert, style: errors.any? ? '' : 'display:none;' }
+  %strong エラー
+  %ul
+    - errors.messages.values.flatten.each do |error|
+      %li= error

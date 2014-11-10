@@ -48,13 +48,12 @@ class GroupsController < ApplicationController
     end
 
     def group_params
-      if not request.get? and params[:group][:member_ids].nil?
-        params[:group][:member_ids] = []
-      end
-      unless params[:group][:member_ids].nil?
+      user_group_ids = params[:group][:member_ids]
+      user_group_ids = [] if not request.get? and user_group_ids.nil?
+      unless user_group_ids.nil?
         @group.user_groups.clear
-        params[:group][:member_ids].each do |member_id|
-          @group.user_groups << UserGroup.find(member_id)
+        user_group_ids.each do |user_group_id|
+          @group.user_groups << UserGroup.find(user_group_id)
         end
       end
       params.require(:group).permit(:iqube_url, :leader_id)

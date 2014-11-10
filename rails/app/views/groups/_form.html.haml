@@ -2,12 +2,7 @@
   = javascript_include_tag :group_form
 
 = form_for @group, url: url, html: { role: 'form' } do |f|
-  - if @group.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@group.errors.count, "error")} prohibited this group from being saved:"
-      %ul
-        - @group.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'error', errors: @group.errors
 
   .form-group
     = f.label :iqube_url, 'iQube URL'
