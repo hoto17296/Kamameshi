@@ -10,7 +10,7 @@
       %li= link_to '経費精算シート(紙)', '#expenses-paper'
       %li= link_to '楽々精算(Web)', '#expenses-web'
 
-  %li= link_to 'その他のお問い合わせ', '#inquiry'
+  %li= link_to 'お問い合わせ', '#inquiry'
 
 
 %h2#about かまめしランチ とは
@@ -123,12 +123,4 @@
   %strong レシートを貼付けて
   提出してください。 
 
-%h2#inquiry その他のお問い合わせ
-%p ご質問は下記の連絡先までお願いします。
-%ul
-  %li
-    石川雄基：
-    = mail_to 'yuuki.ishikawa@gaiax.com', nil, encode: :hex
-  %li
-    田嶋勝利：
-    = mail_to 'katsutoshi.tajima@gaiax.com', nil, encode: :hex
+#inquiry= render 'inquiry'
