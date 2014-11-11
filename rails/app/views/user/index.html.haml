@@ -49,6 +49,13 @@
                   %td= user_group.user.email
                   %td= user_group.user.skype_id
 
+          - if @reply.group.iqube_url.present?
+            %h3 iQube Schedule
+            %p= link_to @reply.group.iqube_url, @reply.group.iqube_url, target: '_blank'
+            %p
+              運営チームで仮の予定をiQubeに入れさせていただきました。
+              リーダーを中心にメンバー内で相談してスケジュール調整をしてください。
+
           -# TODO 説明
           - if @reply.leader?
             %h2 あなたはリーダーです！
