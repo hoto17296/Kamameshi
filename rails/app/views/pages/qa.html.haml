@@ -53,8 +53,40 @@
   ようにしてください。
 
 %h3#expenses-paper 経費精算シート(紙)
--# TODO
-%p (準備中)
+%p
+  = link_to 'GaiaX Intranet : 各種申請用紙', 'https://i.internal.gaiax.com/intra/?s2=finance&s3=accounting&s4=application', target: '_blank'
+  から
+  %code 経費精算シート.xls
+  をダウンロードし、
+  %code 立替金
+  のシートに必要事項を記入してください。
+
+%dl.dl-horizontal
+  %dt 【所属部署】
+  %dd 提出者の部署を記入
+  %dt 【社員番号】
+  %dd 提出者の社員番号を記入
+  %dt 【提出者】
+  %dd 提出者の氏名を記入
+  %dt 【支払日】
+  %dd かまめしランチに行った日付を記入
+  %dt 【目的】
+  %dd 参加人数と参加者名を記入
+  %dd
+    %samp
+      例)
+      %code 4人 (石川・田嶋・長南・細川)
+  %dt 【金額】
+  %dd 合計金額を記入（1,000円/1人まで） 
+  %dt 【部長印】
+  %dd
+    %code 野澤さん
+    にハンコを貰ってください
+
+%p
+  印刷し、
+  %strong レシートを貼付けて
+  提出してください。 
 
 %h3#expenses-web 楽々精算(Web)
 %dl.dl-horizontal
@@ -86,8 +118,10 @@
     %code 野澤さん
     を選択 
 
-%p 印刷し、レシートを貼付けて提出してください。 
-
+%p
+  印刷し、
+  %strong レシートを貼付けて
+  提出してください。 
 
 %h2#inquiry その他のお問い合わせ
 %p ご質問は下記の連絡先までお願いします。
