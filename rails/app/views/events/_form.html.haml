@@ -23,5 +23,9 @@
     = f.label :closed_at, '募集終了日'
     = f.date_select :closed_at
 
+  .form-group.closed_at
+    = f.label :evaluated_at, '事後アンケート開始日'
+    = f.date_select :evaluated_at
+
   .actions
     = f.submit '保存', class: 'btn btn-lg btn-success'

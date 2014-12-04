@@ -10,6 +10,9 @@
     %dd= question
   %dt 募集期間
   %dd= "#{@event.invited_at} 〜 #{@event.closed_at}"
+  - if @event.evaluated_at.present?
+    %dt 事後アンケート開始
+    %dd= "#{@event.evaluated_at} 〜"
   %dt 回答数
   %dd= "#{@event.user_groups.size} 人"
   %dt 参加者数
