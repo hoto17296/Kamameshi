@@ -3,11 +3,11 @@
 one:
   title: MyString
   questions: MyText
-  started_at: 2014-10-16
+  invited_at: 2014-10-16
   ended_at: 2014-10-16
 
 two:
   title: MyString
   questions: MyText
-  started_at: 2014-10-16
+  invited_at: 2014-10-16
   ended_at: 2014-10-16
