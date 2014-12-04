@@ -11,15 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141026044436) do
+ActiveRecord::Schema.define(version: 20141204121045) do
 
   create_table "events", force: true do |t|
-    t.string   "title",      null: false
+    t.string   "title",           null: false
     t.text     "questions"
-    t.date     "started_at", null: false
-    t.date     "ended_at",   null: false
+    t.date     "started_at",      null: false
+    t.date     "ended_at",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "after_questions"
   end
 
   create_table "groups", force: true do |t|
@@ -49,6 +50,7 @@ ActiveRecord::Schema.define(version: 20141026044436) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_participant", default: false, null: false
+    t.text     "after_answers"
   end
 
   add_index "user_groups", ["event_id"], name: "index_user_groups_on_event_id", using: :btree
