@@ -6,7 +6,7 @@ class Event < ActiveRecord::Base
 
   before_save :remove_empty_questions
 
-  scope :current, -> { where('invited_at <= ? AND ended_at >= ?', Date.today, Date.today) }
+  scope :current, -> { where('invited_at <= ? AND closed_at >= ?', Date.today, Date.today) }
   scope :recent, -> { where('invited_at <= ?', Date.today).order('invited_at DESC') }
 
   def participant
@@ -26,7 +26,7 @@ class Event < ActiveRecord::Base
   end
 
   def inviting?
-    invited_at <= Date.today and ended_at >= Date.today
+    invited_at <= Date.today and closed_at >= Date.today
   end
 
   private

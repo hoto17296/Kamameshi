@@ -19,9 +19,9 @@
     = f.label :invited_at, '募集開始日'
     = f.date_select :invited_at
 
-  .form-group.ended_at
-    = f.label :ended_at, '募集終了日'
-    = f.date_select :ended_at
+  .form-group.closed_at
+    = f.label :closed_at, '募集終了日'
+    = f.date_select :closed_at
 
   .actions
     = f.submit '保存', class: 'btn btn-lg btn-success'

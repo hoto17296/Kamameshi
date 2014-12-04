@@ -4,10 +4,10 @@ one:
   title: MyString
   questions: MyText
   invited_at: 2014-10-16
-  ended_at: 2014-10-16
+  closed_at: 2014-10-16
 
 two:
   title: MyString
   questions: MyText
   invited_at: 2014-10-16
-  ended_at: 2014-10-16
+  closed_at: 2014-10-16

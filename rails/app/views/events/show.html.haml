@@ -9,7 +9,7 @@
   - @event.questions.each do |question|
     %dd= question
   %dt 募集期間
-  %dd= "#{@event.invited_at} 〜 #{@event.ended_at}"
+  %dd= "#{@event.invited_at} 〜 #{@event.closed_at}"
   %dt 回答数
   %dd= "#{@event.user_groups.size} 人"
   %dt 参加者数
