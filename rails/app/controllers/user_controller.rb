@@ -42,6 +42,13 @@ class UserController < ApplicationController
     end
   end
 
+  def enquete_after
+    # TODO 事後アンケート募集前ならリダイレクト
+    # TODO 参加者でなければリダイレクト
+    # TODO 既に回答済みであればリダイレクト
+    # TODO POSTだったら保存してリダイレクト or エラー画面
+  end
+
   private
     def reply_params
       params.require(:user_group).permit(:is_participant, { answers: [] })
