@@ -1,11 +1,11 @@
 - content_for :page_javascript do
-  = javascript_include_tag :participate_form
+  = javascript_include_tag :enquete_before_form
 
 %h2
   = @event.title
   参加アンケート
 
-= form_for @reply, url: :participate, html: { role: :form } do |f|
+= form_for @reply, url: :enquete_before, html: { role: :form } do |f|
   - if @reply.errors.any?
     #error_explanation
       %h3= "#{pluralize(@event.errors.count, "error")} prohibited this event from being saved:"

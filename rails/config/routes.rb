@@ -4,8 +4,9 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'user#index'
-  match '/participate' => 'user#participate', via: [ :get, :post, :patch ]
-  match '/enquate/after' => 'user#enquete_after', via: [ :get, :post ]
+
+  match '/enquete/before' => 'user#enquete_before', via: [ :get, :post, :patch ]
+  match '/enquate/after'  => 'user#enquete_after',  via: [ :get, :post ]
 
   devise_for :users,
     controllers: { omniauth_callbacks: 'omniauth_callbacks' },

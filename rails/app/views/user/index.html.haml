@@ -11,7 +11,7 @@
       - if @reply.is_participant
         %p メンバーが決まり次第お知らせしますので、しばらくお待ちください。
       .actions
-        = link_to '回答を変更する', :participate, class: 'btn btn-success'
+        = link_to '回答を変更する', :enquete_before, class: 'btn btn-success'
         %span.text-muted
           回答は
           = @event.closed_at
