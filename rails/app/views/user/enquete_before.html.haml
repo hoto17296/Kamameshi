@@ -35,7 +35,7 @@
       %li 回答内容は運営チーム以外には見えることはありません
     - @event.questions.each_with_index do |question, i|
       .form-group
-        %h4= question
+        %h4!= question
         = f.text_field :answers, name: "user_group[answers][]", id: nil, class: 'form-control', value: @reply.answers[i]
 
   .form-group.actions
