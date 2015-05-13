@@ -134,6 +134,7 @@ GEM
       activesupport (= 4.1.6)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
+    rainbow (2.0.0)
     raindrops (0.13.0)
     rake (10.3.2)
     rdoc (4.1.2)
@@ -204,6 +205,7 @@ DEPENDENCIES
   omniauth
   omniauth-google-oauth2
   rails (= 4.1.6)
+  rainbow
   redcarpet
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)

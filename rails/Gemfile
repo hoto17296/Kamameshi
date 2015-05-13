@@ -48,3 +48,5 @@ gem 'omniauth-google-oauth2'
 gem 'redcarpet'
 
 gem 'actionview-encoded_mail_to'
+
+gem 'rainbow'
