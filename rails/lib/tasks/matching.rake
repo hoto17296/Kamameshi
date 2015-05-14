@@ -40,6 +40,13 @@ namespace :matching do
     end
   end
 
+  desc 'CSVを読み込んでマッチングが過去と被ってないかどうかチェックする'
+  task :check => :environment do
+    CSV.foreach('matched.csv') do |line|
+      check_team line.map {|id| UserGroup.find id }
+    end
+  end
+
   # マッチングする前にソートする
   # ※ 質問内容に応じてここの処理を変える
   def initial_sort(user_groups)
