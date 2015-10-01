@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141204140650) do
+ActiveRecord::Schema.define(version: 20151001151656) do
 
   create_table "events", force: true do |t|
     t.string   "title",           null: false
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20141204140650) do
 
   add_index "user_groups", ["event_id"], name: "index_user_groups_on_event_id", using: :btree
   add_index "user_groups", ["group_id"], name: "index_user_groups_on_group_id", using: :btree
+  add_index "user_groups", ["user_id", "event_id"], name: "user_event_unique", unique: true, using: :btree
   add_index "user_groups", ["user_id"], name: "index_user_groups_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
